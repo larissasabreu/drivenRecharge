@@ -1,5 +1,5 @@
 import { GetPhonesByDocRepository, GetPhonesRepository, PostPhonesRepository } from "../repositories/phones-repository";
-import { CPFTp, Phone } from "protocols/types";
+import { Phone } from "protocols/types";
 
 export async function GetPhonesService(): Promise<Phone[]> {
     const GetPhones = await GetPhonesRepository();

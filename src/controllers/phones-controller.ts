@@ -1,4 +1,4 @@
-import { CPFTp, Phone } from "protocols/types";
+import { Phone } from "protocols/types";
 import { GetPhonesByDocService, GetPhonesService, PostPhonesService } from "../services/phones-service";
 import {Request, Response} from 'express';
 
@@ -20,6 +20,7 @@ export async function GetPhonesByDocController(req: Request, res: Response) {
 // cadastra 
 export async function PostPhonesController(req: Request, res: Response) {
     const PhonesReq = req.body as Phone;
+
     const PostPhones = await PostPhonesService(PhonesReq);
     
     res.status(201).send(PostPhones);
