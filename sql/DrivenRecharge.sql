@@ -1,0 +1,10 @@
+CREATE TABLE phones (
+	id SERIAL PRIMARY KEY,
+	phone_1 VARCHAR(11) NOT NULL,
+	phone_2 VARCHAR(11),
+	phone_3 VARCHAR(11),
+	carriers_code INTEGER NOT NULL, 
+	name TEXT NOT NULL,
+	descricao TEXT NOT NULL,
+	cpf VARCHAR(11) NOT NULL
+);

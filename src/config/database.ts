@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const { Pool } = pg;
-const db = new Pool({
-    connectionString: process.env.DATABASE_URL
-})
 
-export default db;
+const configDatabase = {
+  connectionString: process.env.DATABASE_URL,
+};
 
+export const db = new Pool(configDatabase);
