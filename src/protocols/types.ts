@@ -16,3 +16,17 @@ export type Recharges = {
   telefone_id: number,
   credit_value: number
 };
+
+export type SummaryTp = {
+  id: number,
+  phone: string,
+  carriers_name: string,
+  name: string,
+  description: string,
+  cpf: string,
+  carriers_code: number,
+  phone_number: string,
+  phone_id: number,
+  credit: number,
+  recharge_date: Date
+}
