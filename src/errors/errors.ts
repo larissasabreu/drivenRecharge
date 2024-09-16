@@ -12,3 +12,12 @@ export function same_PhoneNumber() {
         message: "Este telefone já está cadastrado"
     }
 }
+
+// recharges
+
+export function phone_NotFound() {
+    return {
+        type: "phone_NotFound",
+        message: "Este telefone não está cadastrado"
+    }
+}

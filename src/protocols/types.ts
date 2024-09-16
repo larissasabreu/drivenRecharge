@@ -12,21 +12,41 @@ export type Phone = {
   };
 
 export type Recharges = {
-  telefone: string,
   telefone_id: number,
   credit_value: number
 };
 
-export type SummaryTp = {
+export type SummaryQuery = {
   id: number,
   phone: string,
-  carriers_name: string,
+  customer_name: string,
   name: string,
-  description: string,
+  descricao: string,
   cpf: string,
   carriers_code: number,
+  code: number,
   phone_number: string,
   phone_id: number,
   credit: number,
   recharge_date: Date
 }
+
+// export type Summary = {
+//   document: string, 
+//   phones: [
+//     telefone: string,
+//     operadora: number, 
+//     nome: string,
+//     description: string,
+//     cpf: string, 
+//     carrier: {
+//       name: string,
+//       code: number,
+//     },
+//     recharges: {
+//       phone_id: number, 
+//       credit: number,
+//       recharge_date: Date
+//     }
+//   ]
+// };

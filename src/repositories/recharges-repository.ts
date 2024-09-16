@@ -2,11 +2,11 @@ import { db } from "../config/database";
 import { Recharges } from "../protocols/types";
 
 export async function PostRechargeRepository(RechargeReq: Recharges) {
-    const {telefone, telefone_id, credit_value} = RechargeReq;
+    const {telefone_id, credit_value} = RechargeReq;
 
     const InsertPhones = await db.query(`
-        INSERT INTO recharges ("phone_number", "phone_id", "credit") 
-        VALUES ($1, $2, $3)`, [telefone, telefone_id, credit_value]);
+        INSERT INTO recharges ("phone_id", "credit") 
+        VALUES ($1, $2)`, [telefone_id, credit_value]);
     return InsertPhones
 }
 

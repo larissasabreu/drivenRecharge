@@ -1,33 +1,49 @@
 import { db } from "../config/database";
-import { SummaryTp } from "protocols/types";
+import { SummaryQuery } from "../protocols/types";
 
 export async function GetSummaryRepository(SummaryReq: string) {
-    const resultado = await db.query(`
+    const resultado = await db.query<SummaryQuery>(`
         SELECT phones.*, carriers.*, recharges.* 
 	    FROM recharges 
 	    JOIN phones ON phones.id = phone_id
 	    JOIN carriers ON carriers.code = phones.carriers_code
         WHERE phones.cpf = $1
 	    ORDER BY phone_id`, [SummaryReq]);
+        
+        // formatação
+        const rows = resultado.rows
+        const formatados = {
+            document: SummaryReq,
+            phones: []
+        };
 
-    // let SummaryFormatados
+        rows.forEach(row => {
+            let phoneIndex = formatados.phones.findIndex(phone => phone.phone == row.phone);
+            if (phoneIndex == -1) {
+                formatados.phones.push({
+                    telefone: row.phone,
+                    operadora: row.carriers_code,
+                    nome: row.customer_name,
+                    description: row.descricao,
+                    cpf: row.cpf,
+                    carrier: {
+                        name: row.name,
+                        code: row.code
+                    },
+                    recharges: []
+                });
 
-    // for (let i = 0; i < resultado.rows.length; i++) {
-    //     const summary = resultado.rows[i];
+                phoneIndex = formatados.phones.length - 1;
 
-    //     if (SummaryFormatados && SummaryFormatados.id == summary.id) {
-    //         SummaryFormatados.phones.push(
-    //                     summary.cpf,
-    //                     summary.name)
-    //     } else {
-    //         SummaryFormatados = {...summary, phones: [{phone: summary.phone, carriers_code: summary.carriers_code, 
-    //             name: summary.name, description: summary.description
-    //         }], Recharges: [{phone_number: summary.phone_number, credit: summary.credit, recharge_date: summary.recharge_date}], 
-    //         Carriers: [{carrier_name: summary.name, carriers_code: summary.carriers_code}]}
-            
-    //     }
-    // }
-
+                if (row.phone_id) {
+                    formatados.phones[phoneIndex].recharges.push({
+                        phone_id: row.phone_id,
+                        credit: row.credit,
+                        recharge_date: row.recharge_date
+                    })}
+            }})
     
-    return resultado.rows
+    return formatados
+
 }
+

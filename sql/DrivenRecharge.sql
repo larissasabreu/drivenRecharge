@@ -13,14 +13,13 @@ CREATE TABLE phones (
 	id SERIAL PRIMARY KEY,
 	phone VARCHAR(11) NOT NULL UNIQUE,
 	carriers_code INTEGER REFERENCES carriers(code) NOT NULL,
-	name TEXT NOT NULL,
+	customer_name TEXT NOT NULL,
 	description TEXT NOT NULL,
-	cpf VARCHAR(11) NOT NULL
+	cpf VARCHAR(11) NOT NULL UNIQUE
 );
 
 CREATE TABLE recharges (
 	id SERIAL PRIMARY KEY,
-	phone_number VARCHAR(11) REFERENCES phones(phone) NOT NULL,
 	phone_id INTEGER REFERENCES phones(id) NOT NULL,
 	credit INTEGER NOT NULL,
 	recharge_date TIMESTAMP NOT NULL DEFAULT NOW()

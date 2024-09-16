@@ -8,5 +8,4 @@ const RechargesRoute = Router();
 RechargesRoute.post("/recharges", validateSchema(rechargeSchema), PostRechargeController);
 RechargesRoute.get("/recharges/:number", GetRechargeByNumberController);
 
-
 export default RechargesRoute;

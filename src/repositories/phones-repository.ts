@@ -19,10 +19,9 @@ export async function GetPhonesByDocRepository(cpf: string) : Promise<Phone[]> {
 
 export async function PostPhonesRepository(PhonesReq: Phone) {
 	const {telefone, operadora, nome, descrição, cpf} = PhonesReq;
-	console.log(PhonesReq)
 
     const InsertPhones = await db.query(`
-        INSERT INTO phones ("phone", "carriers_code","name","description", "cpf") 
+        INSERT INTO phones ("phone", "carriers_code","customer_name","description", "cpf") 
         VALUES ($1, $2, $3, $4, $5)`, [telefone, operadora, nome, descrição, cpf]);
     return InsertPhones
 }

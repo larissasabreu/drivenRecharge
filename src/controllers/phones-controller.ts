@@ -5,7 +5,6 @@ import {Request, Response} from 'express';
 // lista todos os telefones cadastrados
 export async function GetPhonesController(req: Request, res: Response) {
     const ListPhones = await GetPhonesService();
-    
     res.status(200).send(ListPhones);
 }
 
@@ -21,7 +20,11 @@ export async function GetPhonesByDocController(req: Request, res: Response) {
 export async function PostPhonesController(req: Request, res: Response) {
     const PhonesReq = req.body as Phone;
 
+    try {
     const PostPhones = await PostPhonesService(PhonesReq);
-    
     res.status(201).send(PostPhones);
+    } catch (error) {
+        res.status(409).send(error.detail);
+    }
+    
 }
