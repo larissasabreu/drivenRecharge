@@ -16,4 +16,5 @@ app.use(RechargesRoute);
 app.use(SummaryRoute)
 app.use(errorHandler);
 
-app.listen(5000, () => console.log(`:3`));
+const port = process.env.PORT || 5000 ;
+app.listen(port, () => console.log(`porta ${port}`));
